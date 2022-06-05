@@ -14,13 +14,13 @@ async function ResponseHandler(json, req, res, next) {
         res.status(error.status || DEFAULT_ERROR_CODE);
         res.json({ error_message: error.message })
     } else if (json.error) { // Specific Error
-        const error = createError(json.error)
+        const error = createError(DEFAULT_ERROR_CODE, json.error)
         // set locals, only providing error in development
         res.locals.message = error.message;
         res.locals.error = req.app.get('env') === 'development' ? error : {};
 
         // send the error
-        res.status(error.status || DEFAULT_ERROR_CODE);
+        res.status(error.status);
         res.json({ error_message: error.message })
     } else { // Success (200)
         res.json(json)
