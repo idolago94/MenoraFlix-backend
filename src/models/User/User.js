@@ -32,6 +32,18 @@ userSchema.static('register', async function ({ username, password }) {
     })
 })
 
+userSchema.static('auth', async function (username, password) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await this.findByUserName(username)
+            if (user && BcryptService.compare(password, user.password)) resolve(user)
+            else reject('שם משתמש או סיסמה לא נכונים.')
+        } catch (e) {
+            reject(e)
+        }
+    })
+})
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User

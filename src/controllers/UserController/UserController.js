@@ -11,7 +11,18 @@ class UserController {
                 console.log('UserController -> addUser -> error', e);
                 reject(e)
             }
+        })
+    }
 
+    auth = async (username, password) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const userRes = await User.auth(username, password)
+                resolve(userRes)
+            } catch (e) {
+                console.log('UserController -> addUser -> error', e);
+                reject(e)
+            }
         })
     }
 }

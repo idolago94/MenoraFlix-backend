@@ -14,4 +14,14 @@ router.post('/Register', async (req, res, next) => {
     }
 });
 
+router.post('/Login', async (req, res, next) => {
+    try {
+        const response = await UserController.auth(req.body.username, req.body.password)
+        next({ results: response })
+    } catch (error) {
+        console.log('PostRegister -> error', error);
+        return next({ error })
+    }
+});
+
 module.exports = router;
