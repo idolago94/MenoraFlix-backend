@@ -14,8 +14,6 @@ mongoose.connect(process.env.MONGODB_URI,
 const ResponseHandler = require('./src/middlewares/ResponseHandler')
 
 // Routers
-const indexRouter = require('./src/routes/index');
-const usersRouter = require('./src/routes/users');
 const apiRouter = require('./src/routes/api');
 
 const app = express();
@@ -30,8 +28,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
 app.use(ResponseHandler)
