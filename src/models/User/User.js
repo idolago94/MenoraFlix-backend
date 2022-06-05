@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
-// const BcryptMiddleware = require('../Middlewares/bcrypt')
+const BcryptService = require('../../services/BcryptService')
 
 const userSchema = new Schema({
     username: String,
@@ -20,9 +20,8 @@ userSchema.static('register', async function ({ username, password }) {
             } else {
                 let userData = {
                     username,
-                    password//: BcryptMiddleware.hashPassword(data.password)
+                    password: BcryptService.hash(password)
                 }
-                console.log(`### -> returnnewPromise -> userData`, userData)
                 let newUser = new this(userData)
                 const userRes = await newUser.save()
                 resolve(userRes)
