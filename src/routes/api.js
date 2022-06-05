@@ -1,17 +1,17 @@
 const express = require('express');
+const UserController = require('../controllers/UserController');
 const router = express.Router();
 // Moddlewares
 // const TokenMiddleware = require('../Middlewares/Token')
-// const FileMiddleware = require('../Middlewares/file')
 
-router.get('/Register', async (req, res, next) => {
+router.post('/Register', async (req, res, next) => {
     try {
-        next({ results: 'success' })
+        const response = await UserController.addUser(req.body)
+        next({ results: response })
     } catch (error) {
         console.log('PostRegister -> error', error);
         return next({ error })
     }
 });
-
 
 module.exports = router;

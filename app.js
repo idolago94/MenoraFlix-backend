@@ -14,9 +14,9 @@ mongoose.connect(process.env.MONGODB_URI,
 const ResponseHandler = require('./src/middlewares/ResponseHandler')
 
 // Routers
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const apiRouter = require('./routes/api');
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/users');
+const apiRouter = require('./src/routes/api');
 
 const app = express();
 
