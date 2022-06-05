@@ -3,6 +3,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config()
+
+// MongoDB
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI,
+(err) => err ? console.log('\x1b[31m', 'Failed to connect mongodb -> ', err) : console.log('\x1b[32m', 'Connect to mongoDB'));
 
 // Service and Middlewares
 const ResponseHandler = require('./src/middlewares/ResponseHandler')

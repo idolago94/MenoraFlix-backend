@@ -1,2 +1,2 @@
 const ResponseHandler = require('./ResponseHandler')
-module.exports =  ResponseHandler
+module.exports = ResponseHandler
