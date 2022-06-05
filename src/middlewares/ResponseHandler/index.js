@@ -1,2 +1,2 @@
-const ResponseHandler = require('./ResponseHandler')
-module.exports = ResponseHandler
+const ApiResponseHandler = require('./ApiResponseHandler')
+module.exports = ApiResponseHandler

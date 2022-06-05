@@ -20,7 +20,19 @@ class UserController {
                 const userRes = await User.auth(username, password)
                 resolve(userRes)
             } catch (e) {
-                console.log('UserController -> addUser -> error', e);
+                console.log('UserController -> auth -> error', e);
+                reject(e)
+            }
+        })
+    }
+
+    getByUsername = async (username) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const userRes = await User.findByUserName(username)
+                resolve(userRes)
+            } catch (e) {
+                console.log('UserController -> getByUsername -> error', e);
                 reject(e)
             }
         })
