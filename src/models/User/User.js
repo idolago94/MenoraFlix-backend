@@ -7,8 +7,8 @@ const userSchema = new Schema({
     password: String
 });
 
-userSchema.static('findByUserName', async function (userName) {
-    return await this.findOne({ userName })
+userSchema.static('findByUserName', async function (username) {
+    return await this.findOne({ username })
 })
 
 userSchema.static('register', async function ({ username, password }) {
@@ -16,7 +16,7 @@ userSchema.static('register', async function ({ username, password }) {
         try {
             const userExist = await this.findByUserName(username)
             if (userExist) {
-                reject('.שם המשתמש קיים. אנא בחר שם משתמש אחר')
+                reject('שם המשתמש קיים. אנא בחר שם משתמש אחר')
             } else {
                 let userData = {
                     username,
