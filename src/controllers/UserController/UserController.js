@@ -1,5 +1,4 @@
-const User = require('../../Models/User')
-// const BcryptMiddleware = require('../../Middlewares/bcrypt/bcrypt')
+const User = require('../../models/User')
 
 class UserController {
     addUser = async (userDetails) => {
