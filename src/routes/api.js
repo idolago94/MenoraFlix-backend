@@ -2,7 +2,8 @@ const express = require('express');
 const UserController = require('../controllers/UserController');
 const router = express.Router();
 // Moddlewares
-const JwtMiddleware = require('../middlewares/JwtMiddleware')
+const JwtMiddleware = require('../middlewares/JwtMiddleware');
+const MoviesService = require('../services/MoviesService/MoviesService');
 
 router.post('/Register', async (req, res, next) => {
     try {
@@ -26,7 +27,8 @@ router.post('/Login', async (req, res, next) => {
 
 router.get('/GetMovies', JwtMiddleware.verify, async (req, res, next) => {
     try {
-        next({ results: 'success' })
+        const response = await MoviesService.getMovies(req.query)
+        next({ results: response })
     } catch (error) {
         console.log('PostRegister -> error', error);
         return next({ error })
