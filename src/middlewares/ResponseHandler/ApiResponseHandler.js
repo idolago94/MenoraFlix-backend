@@ -25,9 +25,6 @@ async function ResponseHandler(json, req, res, next) {
         res.status(error.status);
         res.json({ error_message: error.message })
     } else { // Success (200)
-        if (!NON_TOKEN_REQUIRE_REQUEST.includes(req.url)) {
-            res.set('HsToken', await JwtMiddleware.generate(req.user || json.results))
-        }
         res.json(json)
     }
 };
