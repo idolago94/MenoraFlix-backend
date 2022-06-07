@@ -5,9 +5,9 @@ const router = express.Router();
 const JwtMiddleware = require('../middlewares/JwtMiddleware');
 const MoviesService = require('../services/MoviesService/MoviesService');
 
-router.post('/Register', async (req, res, next) => {
+router.post('/Register', JwtMiddleware.verify, async (req, res, next) => {
     try {
-        const response = await UserController.addUser(req.body)
+        const response = await UserController.addUser(req.user)
         next({ results: response })
     } catch (error) {
         console.log('PostRegister -> error', error);
@@ -15,9 +15,9 @@ router.post('/Register', async (req, res, next) => {
     }
 });
 
-router.post('/Login', async (req, res, next) => {
+router.post('/Login', JwtMiddleware.verify, async (req, res, next) => {
     try {
-        const response = await UserController.auth(req.body.username, req.body.password)
+        const response = await UserController.auth(req.user.username, req.user.password)
         next({ results: response })
     } catch (error) {
         console.log('PostRegister -> error', error);
@@ -25,7 +25,7 @@ router.post('/Login', async (req, res, next) => {
     }
 });
 
-router.get('/GetMovies', JwtMiddleware.verify, async (req, res, next) => {
+router.get('/GetMovies', async (req, res, next) => {
     try {
         const response = await MoviesService.getMovies(req.query)
         next({ results: response })
